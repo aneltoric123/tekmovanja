@@ -3,18 +3,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/index.css">
     <title>Login</title>
 </head>
 <body>
-    <div>
-        <form method="POST" action="/login_check">
+    <div class="container">
+        <h1>Login</h1>
+        @csrf
+        <form method="POST" action="/homepage">
             <input type="email" name="email" placeholder="E-mail">
             <input type="password" name="password" placeholder="Geslo">
-            <input type="submit" name="login" placeholder="Login">
+            <button type="submit" name="login">Login</button>
         </form>
+        <a href="/reg">
+            Registriraj se!
+            </a>
     </div>
-<a href="/reg">
-Registriraj se!
-</a>
+
 </body>
 </html>

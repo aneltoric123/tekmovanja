@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class LeaderboardModel extends Model
 {
     use HasFactory;
+    protected $table = 'lestvica';
 }

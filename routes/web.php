@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,8 @@ Route::get('/', function () {
 Route::get('/reg', function () {
     return view('reg');
 });
+Route::get('/homepage', function () {
+    return view('homepage');
+});
+
+Route::post('/Logout', [UserController::class , 'Logout']);

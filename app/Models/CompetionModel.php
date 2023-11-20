@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class CompetionModel extends Model
 {
     use HasFactory;
+    protected $table = 'tekmovanja';
 }

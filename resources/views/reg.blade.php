@@ -10,18 +10,30 @@
 <body>
     <div class="container">
         <h1>Registracija</h1>
-        @csrf
-        <form method="POST" action="/">
+
+        <form method="POST" action="/index">
+            @csrf
+
             <input type="text" name="polno_ime" placeholder="Ime in priimek">
             <input type="text" name="vzdevek" placeholder="Uporabnikško ime">
             <input type="email" name="email" placeholder="E-mail">
             <input type="password" name="password" placeholder="Geslo">
-            <input type="password" name="password" placeholder="Ponovno vnesi geslo">
+            <input type="password" name="password_confirmation" placeholder="Ponovno vnesi geslo">
             <button type="submit" name="login">Registracija</button>
         </form>
-        <a href="/">
+        <a href="/index">
             Nazaj na login!
             </a>
     </div>
+    @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success') }}
+    </div>
+    @if(Session::has('error'))
+    <div class="notification error">
+        {{ Session::get('error') }}
+    </div>
+@endif
+@endif
 </body>
 </html>

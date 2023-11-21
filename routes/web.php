@@ -18,10 +18,16 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/index', function () {
+    return view('index');
+});
 
 Route::get('/reg', function () {
     return view('reg');
 });
+Route::post('/reg', [UserController::class, 'register']);
+Route::post('/index', [UserController::class, 'register']);
+
 Route::get('/homepage', function () {
     return view('homepage');
 });
@@ -29,4 +35,4 @@ Route::get('/profile',function(){
  return view( 'profile');
 });
 
-Route::post('/Logout', [UserController::class , 'Logout']);
+

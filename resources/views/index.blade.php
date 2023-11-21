@@ -9,8 +9,10 @@
 <body>
     <div class="container">
         <h1>Login</h1>
-        @csrf
+
         <form method="POST" action="/homepage">
+            @csrf
+
             <input type="email" name="email" placeholder="E-mail">
             <input type="password" name="password" placeholder="Geslo">
             <button type="submit" name="login">Login</button>

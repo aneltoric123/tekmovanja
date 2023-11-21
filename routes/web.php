@@ -25,5 +25,8 @@ Route::get('/reg', function () {
 Route::get('/homepage', function () {
     return view('homepage');
 });
+Route::get('/profile',function(){
+ return view( 'profile');
+});
 
 Route::post('/Logout', [UserController::class , 'Logout']);

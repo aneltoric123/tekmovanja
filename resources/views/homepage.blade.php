@@ -5,15 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="/css/homepage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </head>
 <body>
+    <script>
+        $(document).ready(function() {
+    $('a').click(function(e) {
+        e.preventDefault();
+
+        var url = $(this).attr('href');
+
+        // Make an AJAX request to the URL
+        $.get(url, function(data) {
+            $('#content').html(data);
+        });
+    });
+});
+    </script>
+    <div id="content">
     <header>
 
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="/homepage">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
 
             </ul>
         </nav>
@@ -61,5 +78,6 @@
 
         <p>&copy; 2023 Your Website Name. All Rights Reserved.</p>
     </footer>
+</div>
 </body>
 </html>

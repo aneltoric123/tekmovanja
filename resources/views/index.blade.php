@@ -7,6 +7,7 @@
     <title>Login</title>
 </head>
 <body>
+
     <div class="container">
         <h1>Login</h1>
 
@@ -20,7 +21,30 @@
         <a href="/reg">
             Registriraj se!
             </a>
+            <script>
+                setTimeout(function() {
+                    document.querySelector('.notification').classList.add('fade-out');
+                }, 3000);
+            </script>
+
+    @if(Session::has('success'))
+    <div class="notification">
+    <div class="success">
+        {{ Session::get('success') }}
+    </div>
+    </div>
+    @endif
+    @if($errors->any())
+    <div class="notification">
+        <div class="error">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     </div>
 
+@endif
 </body>
 </html>

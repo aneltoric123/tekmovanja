@@ -11,7 +11,7 @@
     <div class="container">
         <h1>Registracija</h1>
 
-        <form method="POST" action="/index">
+        <form method="POST" action="/reg">
             @csrf
 
             <input type="text" name="polno_ime" placeholder="Ime in priimek">
@@ -25,15 +25,24 @@
             Nazaj na login!
             </a>
     </div>
-    @if(Session::has('success'))
-    <div class="alert alert-success">
-        {{ Session::get('success') }}
-    </div>
     @if(Session::has('error'))
-    <div class="notification error">
-        {{ Session::get('error') }}
-    </div>
+    <div class="notification">
+        @if($errors->any())
+        <div class="error">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+</div>
+<script>
+    setTimeout(function() {
+        document.querySelector('.notification').classList.add('fade-out');
+    }, 3000);
+</script>
 @endif
-@endif
+
 </body>
 </html>

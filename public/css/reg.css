@@ -11,21 +11,34 @@ body {
     animation: gradient 10s ease infinite;
 }
 .notification {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: center;
-}
 
-.success {
-    background-color: #4CAF50;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336;
     color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: auto;
 }
 
 .error {
-    background-color: #f44336;
-    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.notification.fade-out {
+    animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 @keyframes gradient {
     0% { background-position: 0% 50%; }

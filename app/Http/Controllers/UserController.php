@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Foundation\Auth\User;
@@ -26,7 +26,7 @@ public function register(Request $request)
         Session::flash('error', 'Registracija neuspešna');
         return redirect('/reg')->withErrors($validator)->withInput();
     }
-    $user = User::create([
+    $user = UserModel::create([
         'fullname' => $request->input('polno_ime'),
         'vzdevek' => $request->input('vzdevek'),
         'email' => $request->input('email'),
@@ -35,6 +35,23 @@ public function register(Request $request)
 
     Session::flash('success', 'Registracija uspešna!');
     return redirect('/index');
+}
+public function authenticate(Request $request){
+    $validator = Validator::make($request->all(), [
+        'email' => ['required', 'string', 'email', 'max:55', 'unique:uporabniki'],
+        'password' => ['required', 'string', 'min:8', 'max:55'],
+    ]);
+
+    if ($validator->fails()) {
+        Session::flash('error', 'Prijava neuspešna');
+        return redirect('/index')->withErrors($validator)->withInput();
+    }
+    $user=UserModel::Auth([
+        'email' =>$request->input('email'),
+        'geslo' =>$request->input('password'),
+    ]);
+    Session::flash('success', 'Prijava uspešna!');
+    return redirect('/homepage');
 }
 
 }

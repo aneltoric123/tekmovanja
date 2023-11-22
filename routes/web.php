@@ -21,16 +21,19 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('index');
 });
-
 Route::get('/reg', function () {
     return view('reg');
 });
 Route::post('/reg', [UserController::class, 'register']);
+
 Route::post('/index', [UserController::class, 'register']);
+Route::post('/', [UserController::class, 'register']);
 
 Route::get('/homepage', function () {
     return view('homepage');
 });
+Route::post('/homepage', [UserController::class, 'authenticate']);
+
 Route::get('/profile',function(){
  return view( 'profile');
 });

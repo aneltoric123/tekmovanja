@@ -33,6 +33,7 @@ Route::get('/homepage', function () {
     return view('homepage');
 });
 Route::post('/homepage', [UserController::class, 'authenticate']);
+Route::post('/index', [UserController::class, 'authenticate']);
 
 Route::get('/profile',function(){
  return view( 'profile');

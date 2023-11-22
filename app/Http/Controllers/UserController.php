@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
-use Illuminate\Foundation\Auth\User;
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+
 public function register(Request $request)
 {
     $validator = Validator::make($request->all(), [
@@ -26,6 +28,7 @@ public function register(Request $request)
         Session::flash('error', 'Registracija neuspešna');
         return redirect('/reg')->withErrors($validator)->withInput();
     }
+    $user = new UserModel();
     $user = UserModel::create([
         'fullname' => $request->input('polno_ime'),
         'vzdevek' => $request->input('vzdevek'),
@@ -37,21 +40,17 @@ public function register(Request $request)
     return redirect('/index');
 }
 public function authenticate(Request $request){
-    $validator = Validator::make($request->all(), [
-        'email' => ['required', 'string', 'email', 'max:55', 'unique:uporabniki'],
-        'password' => ['required', 'string', 'min:8', 'max:55'],
-    ]);
+    $credentials = new UserModel();
+    $credentials = $request->only('email', 'password');
 
-    if ($validator->fails()) {
-        Session::flash('error', 'Prijava neuspešna');
-        return redirect('/index')->withErrors($validator)->withInput();
+    if (Auth::attempt($credentials)) {
+        Session::flash('success', 'Prijava uspešna!');
+        return redirect('/homepage');
     }
-    $user=UserModel::Auth([
-        'email' =>$request->input('email'),
-        'geslo' =>$request->input('password'),
-    ]);
-    Session::flash('success', 'Prijava uspešna!');
-    return redirect('/homepage');
+else{
+    Session::flash('error', 'Prijava neuspešna');
+    return redirect('/index')->withErrors(['email' => 'Prijava neuspešna'])->withInput();
+}
 }
 
 }

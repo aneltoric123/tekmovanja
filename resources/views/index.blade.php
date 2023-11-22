@@ -35,7 +35,7 @@
     </div>
     @endif
     @if($errors->any())
-    <div class="notification">
+    <div class="notification2">
         <div class="error">
             <ul>
                 @foreach ($errors->all() as $error)

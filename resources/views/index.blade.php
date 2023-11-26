@@ -21,19 +21,7 @@
         <a href="/reg">
             Registriraj se!
             </a>
-            <script>
-                setTimeout(function() {
-                    document.querySelector('.notification').classList.add('fade-out');
-                }, 3000);
-            </script>
 
-    @if(Session::has('success'))
-    <div class="notification">
-    <div class="success">
-        {{ Session::get('success') }}
-    </div>
-    </div>
-    @endif
     @if($errors->any())
     <div class="notification2">
         <div class="error">

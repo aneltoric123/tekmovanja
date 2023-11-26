@@ -16,6 +16,7 @@
 
             <input type="text" name="polno_ime" placeholder="Ime in priimek">
             <input type="text" name="vzdevek" placeholder="Uporabnikško ime">
+            <input type="date" name="datum_rojstva" placeholder="Datum Rojstva">
             <input type="email" name="email" placeholder="E-mail">
             <input type="password" name="password" placeholder="Geslo">
             <input type="password" name="password_confirmation" placeholder="Ponovno vnesi geslo">

@@ -15,7 +15,7 @@
     $('a').click(function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
-
+        history.pushState(null, null, url);
 
         $.get(url, function(data) {
             $('#content').html(data);
@@ -27,11 +27,21 @@
     <header>
 
         <nav>
-            <ul>
-                <li><a href="/homepage">Home</a></li>
-                <li><a href="/profile">Profile</a></li>
 
-            </ul>
+            <a href="/homepage">
+                <img src="/images/home-icon-silhouette.svg" alt="Home Icon">
+                Home
+                 </a>
+                 <a href="/profile">
+                     <img src="/images/profile-svgrepo-com.svg" alt="Profile Icon">
+                     Profile
+
+             </a>
+                 <a href="/logout">
+                     <img src="/images/logout-svgrepo-com.svg" alt="Home Icon">
+                     Logout
+                 </a>
+
         </nav>
     </header>
     <section class="user-profile">
@@ -53,18 +63,23 @@
             <p>Description: Show your artistic skills.</p>
             <p>Edit <a href="#">Details</a></p>
         </div>
-        <!-- Add more competitions -->
+
     </section>
 
-    <!-- User Activity Section -->
+
     <section class="user-activity">
         <h2>User Activity</h2>
         <div class="activity-info">
             <p>Overall Ranking: 5th</p>
             <p>Photography Category Ranking: 2nd</p>
-            <!-- Display more activity and rankings -->
+
         </div>
     </section>
+    <footer>
+
+        <p>&copy; 2023 Your Website Name. All Rights Reserved.</p>
+    </footer>
 </div>
+
 </body>
 </html>

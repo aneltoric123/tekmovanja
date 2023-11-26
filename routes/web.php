@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -24,6 +25,7 @@ Route::get('/index', function () {
 Route::get('/reg', function () {
     return view('reg');
 });
+
 Route::post('/reg', [UserController::class, 'register']);
 
 Route::post('/index', [UserController::class, 'register']);
@@ -32,6 +34,7 @@ Route::post('/', [UserController::class, 'register']);
 Route::get('/homepage', function () {
     return view('homepage');
 });
+Route::post('/homepage',[CategoryController::class,'category_create']);
 Route::post('/homepage', [UserController::class, 'authenticate']);
 Route::post('/index', [UserController::class, 'authenticate']);
 

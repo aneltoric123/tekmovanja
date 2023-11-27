@@ -49,8 +49,8 @@
                     Profile
 
             </a>
-                <a href="/logout">
-                    <img src="/images/logout-svgrepo-com.svg" alt="Home Icon">
+                <a href="{{ route('logout') }}">
+                    <img src="/images/logout-svgrepo-com.svg" alt=" Logout Icon">
                     Logout
                 </a>
         </nav>
@@ -60,11 +60,15 @@
         <section class="categories">
             <h2>Categories <button id="show_form" onclick="showform()">Create Category</button></h2>
 
+            @if(isset($ime_kategorije) && count($ime_kategorije) > 0)
             <ul>
-                <li><a href="#">Category 1</a></li>
-                <li><a href="#">Category 2</a></li>
-
+                @foreach($ime_kategorije as $category)
+                    <li>{{ $category->ime_kategorije }}</li>
+                @endforeach
             </ul>
+        @else
+            <p>No categories found.</p>
+        @endif
         </section>
         <script src="/javascript/popup.js">
 

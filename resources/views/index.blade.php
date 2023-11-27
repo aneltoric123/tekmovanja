@@ -7,7 +7,13 @@
     <title>Login</title>
 </head>
 <body>
-
+    @if(Session::has('success'))
+    <div class="notification">
+    <div class="success">
+    {{ Session::get('success') }}
+    </div>
+    </div>
+    @endif
     <div class="container">
         <h1>Login</h1>
 

@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
+use App\Models\CategoryModel;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +35,13 @@ Route::post('/', [UserController::class, 'register']);
 Route::get('/homepage', function () {
     return view('homepage');
 });
-Route::post('/homepage',[CategoryController::class,'category_create']);
+Route::post('/category_create',[CategoryController::class,'category_create'])->name('category_create');
 Route::post('/homepage', [UserController::class, 'authenticate']);
 Route::post('/index', [UserController::class, 'authenticate']);
+Route::get('/homepage',[CategoryController::class,'show_categories']);
+
+
+Route::get('/logout',[UserController::class,'logout'])->name('logout');;
 
 Route::get('/profile',function(){
  return view( 'profile');

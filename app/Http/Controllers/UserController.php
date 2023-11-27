@@ -35,20 +35,21 @@ public function register(Request $request)
         'datum_rojstva' => $request->input('datum_rojstva'),
         'vzdevek' => $request->input('vzdevek'),
         'email' => $request->input('email'),
-        'geslo' => bcrypt($request->input('password')),
+        'password' => bcrypt($request->input('password'))
     ]);
-    Auth::login($user);
+   Auth::login($user);
 
     Session::flash('success', 'Registracija uspešna!');
     return redirect('/homepage');
 }
 public function authenticate(Request $request){
 
-    $credentials = $request->validate([
+    validator(request()->all(),[
         'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
-    if (Auth::attempt($credentials)){
+        'password' => ['required']
+    ])->validate();
+
+    if(auth()->attempt(request()->only(['email','password']))){
         Session::flash('success', 'Prijava uspešna!');
         return redirect('/homepage');
     }
@@ -56,6 +57,12 @@ else{
     Session::flash('error', 'Prijava neuspešna');
     return redirect('/index')->withErrors(['email' => 'Prijava neuspešna'])->withInput();
 }
+}
+
+public function logout(){
+    Auth::logout();
+    Session::flash('success', 'Uspešno  odjavljen!');
+    return redirect("/index");
 }
 
 }

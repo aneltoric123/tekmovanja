@@ -11,7 +11,9 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends AuthenticatableUser
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    public function isAdmin(){
+        return  $this-> email === "miha@gmail.com";
+}
     /**
      * The attributes that are mass assignable.
      *
@@ -23,7 +25,7 @@ class User extends AuthenticatableUser
         'vzdevek',
         'datum_rojstva',
         'email',
-        'geslo',
+        'password',
 
     ];
 

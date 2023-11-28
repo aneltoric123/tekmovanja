@@ -58,12 +58,32 @@
 
     <main>
         <section class="categories">
-            <h2>Categories <button id="show_form" onclick="showform()">Create Category</button></h2>
-
+            <h2>Categories
+                @if(auth()->check() && auth()->user()->isAdmin())
+                <button id="show_form" onclick="showform()">Create Category</button>
+                @endif
+            </h2>
+<!-- <script src="/javascript/deleting_category.js"></script> -->
             @if(isset($ime_kategorije) && count($ime_kategorije) > 0)
             <ul>
                 @foreach($ime_kategorije as $category)
-                    <li>{{ $category->ime_kategorije }}</li>
+                    <li>{{ $category->ime_kategorije }}
+                    @if(auth()->check() && auth()->user()->isAdmin())
+                    <form method="POST" action="{{ route('category.edit', ['id' => $category->id]) }}" id="update_category_form">
+                    @csrf
+                    <button type="submit" class="edit-button" value="{{ $category->id }}">
+                        <img src="/images/edit_icon.png" alt="Edit" >
+                    </button>
+                    </form>
+                    <form method="POST" action="{{ route('category.delete', ['id' => $category->id]) }}" id="delete_category_form">
+                    @csrf
+                    <button type="submit" class="delete-button" value="{{ $category->id }}">
+                        <img src="/images/delete_icon.png" alt="Delete">
+
+                    </button>
+                    </form>
+                    @endif
+                </li>
                 @endforeach
             </ul>
         @else
@@ -74,13 +94,13 @@
 
         </script>
         <section class="create-category-form" id="create_category_form" class="form-visible" style="display: none">
-
+<script src="/javascript/form_reloading.js"></script>
             <h2>Create Category</h2>
             <span class="close" onclick="closePopup()">&times;</span>
-            <form method="post" action="/category_create" >
+            <form method="post" action="/category_create" id="createCategoryForm">
                 @csrf
                 <input type="text" name="ime_kategorije" placeholder="Ime kategorije">
-                <button type="submit">Ustvari kategorijo</button>
+                <button type="submit" id="createCategoryBtn">Ustvari kategorijo</button>
             </form>
 
         </section>

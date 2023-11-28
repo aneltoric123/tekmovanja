@@ -32,5 +32,19 @@ public function category_create(Request $request){
     Session::flash('success', 'Kategorija ustvarjena!');
     return redirect('/homepage');
 }
+public function category_delete($id){
 
+   $category= CategoryModel::find($id);
+   if (!$category) {
+    return redirect('/homepage')->with('error', 'Category not found.');
+}
+   $category->delete();
+
+   Session::flash('success', 'Kategorija izbrisana!');
+   return redirect('/homepage');
+
+}
+public function category_update($id){
+
+}
 }

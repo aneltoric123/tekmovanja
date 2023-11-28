@@ -39,7 +39,8 @@ Route::post('/category_create',[CategoryController::class,'category_create'])->n
 Route::post('/homepage', [UserController::class, 'authenticate']);
 Route::post('/index', [UserController::class, 'authenticate']);
 Route::get('/homepage',[CategoryController::class,'show_categories']);
-
+Route::post('/category_delete/{id}', [CategoryController::class, 'category_delete'])->name('category.delete');
+Route::post('/category_update/{id}', [CategoryController::class, 'category_update'])->name('category.edit');
 
 Route::get('/logout',[UserController::class,'logout'])->name('logout');;
 

@@ -152,4 +152,34 @@ footer {
 .close:hover {
         color: #777;
     }
+ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+li {
+        background-color: #fff;
+        padding: 10px;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Edit and delete buttons */
+.edit-button,
+.delete-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+.edit-button img,
+.delete-button img {
+        width: 20px;
+        height: 20px;
+        /* Replace with your actual edit and delete icon styles */
+    }
 

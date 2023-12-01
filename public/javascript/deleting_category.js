@@ -1,15 +1,17 @@
 $(document).ready(function() {
 
-    $('#delete_category_form').submit(function(e) {
+    $('.delete-button').submit(function(e) {
         e.preventDefault();
 
-        var formData = $(this).serialize();
-
+        var categoryID = $(this).data('category-id');
 
         $.ajax({
-            type: 'POST',
-            url: '/category_delete',
-            data: formData,
+            type: 'DELETE',
+            url: '/category_delete/'+categoryID,
+            data:{
+                 _token: '{{ csrf_token() }}',
+            id: categoryID
+        },
             success: function(response) {
 
                 $('#content').html(response);

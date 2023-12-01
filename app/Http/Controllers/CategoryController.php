@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    public function show_categories()
-    {
-        $ime_kategorije = CategoryModel::all();
 
-        return view('homepage', compact('ime_kategorije'));
-    }
 public function category_create(Request $request){
     $validator = Validator::make($request->all(), [
         'ime_kategorije' =>['required','min:4','max:55','unique:kategorije']
@@ -44,7 +39,19 @@ public function category_delete($id){
    return redirect('/homepage');
 
 }
-public function category_update($id){
+public function updateCategory(Request $request, $id)
+{
+    $request->validate([
+        'category_name' => 'required|min:2|max:255' // Adjust validation rules as needed
+    ]);
+
+    $category = CategoryModel::findOrFail($id);
+    $category->ime_kategorije = $request->input('category_name');
+    $category->save();
+        Session::flash('success', 'Kategorija posodobljena!');
+return redirect('/homepage');
+
+    }
 
 }
-}
+

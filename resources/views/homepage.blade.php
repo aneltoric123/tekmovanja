@@ -63,19 +63,19 @@
                 <button id="show_form" onclick="showform()">Create Category</button>
                 @endif
             </h2>
-<!-- <script src="/javascript/deleting_category.js"></script> -->
-            @if(isset($ime_kategorije) && count($ime_kategorije) > 0)
+
+<script src="/javascript/deleting_category.js"></script>
+            @if(isset($categories) && count($categories) > 0)
             <ul>
-                @foreach($ime_kategorije as $category)
-                    <li>{{ $category->ime_kategorije }}
-                    @if(auth()->check() && auth()->user()->isAdmin())
-                    <form method="POST" action="{{ route('category.edit', ['id' => $category->id]) }}" id="update_category_form">
+                <li>
+                @foreach($categories as $category)
+                @if(auth()->check() && auth()->user()->isAdmin())
+                <form method="POST" action="{{ route('category.update', ['id' => $category->id]) }}">
                     @csrf
-                    <button type="submit" class="edit-button" value="{{ $category->id }}">
-                        <img src="/images/edit_icon.png" alt="Edit" >
-                    </button>
-                    </form>
-                    <form method="POST" action="{{ route('category.delete', ['id' => $category->id]) }}" id="delete_category_form">
+                    <input type="text" name="category_name" value="{{ $category->ime_kategorije }}" />
+                    <button type="submit">Save</button>
+                </form>
+                    <form method="POST" action="{{ route('category.delete', ['id' => $category->id]) }}" class="delete_category_form">
                     @csrf
                     <button type="submit" class="delete-button" value="{{ $category->id }}">
                         <img src="/images/delete_icon.png" alt="Delete">
@@ -93,7 +93,7 @@
         <script src="/javascript/popup.js">
 
         </script>
-        <section class="create-category-form" id="create_category_form" class="form-visible" style="display: none">
+        <section class="create-form" id="create-form" class="form-visible" style="display: none">
 <script src="/javascript/form_reloading.js"></script>
             <h2>Create Category</h2>
             <span class="close" onclick="closePopup()">&times;</span>
@@ -106,19 +106,37 @@
         </section>
 
         <section class="active-competitions">
-            <h2>Active Competitions</h2>
-
+            <h2>Active Competitions
+                <button id="show_form" onclick="showform2()">Create Competetion</button>
+            </h2>
+            @foreach ($competitions as $competition)
             <div class="competition">
-                <h3>Competition 1</h3>
-                <p>Description: Lorem ipsum dolor sit amet...</p>
-                <p>Creator: John Doe</p>
-                <a href="#">Details</a>
-            </div>
 
+                <h3>Ime: {{ $competition->ime_tekmovanja }}</h3>
+                <p>Opis: {{ $competition->opis_tekmovanja }}</p>
+                <p>Ustvarjalec: {{ $competition->user->vzdevek }}</p>
+                <a href="/competetion/">Details</a>
+
+            </div>
+            @endforeach
         </section>
 
+<section class="create-form" id="create-form2" class="form-visible" style="display: none">
+<span class="close" onclick="closePopup2()">&times;</span>
+ <form method="post" action="/competetion_create" id="createCompetetionForm">
+                @csrf
+                <input type="text" name="ime_tekmovanja" placeholder="Ime Tekmovanja">
+                <input type="text" name="opis_tekmovanja" placeholder="Kratek opis">
+                <label>Kategorija:</label>
+                <select name="kategorija_id">
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id}}">{{ $category->ime_kategorije}}</option>
+                    @endforeach
+                </select>
 
-
+                <button type="submit" id="createComptetionBtn">Ustvari Tekmovanje</button>
+            </form>
+            </section>
         <section class="user-posts">
             <h2>User Posts Awaiting Review</h2>
 

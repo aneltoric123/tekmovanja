@@ -5,6 +5,9 @@ use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompetionsController;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +41,10 @@ Route::get('/homepage', function () {
 Route::post('/category_create',[CategoryController::class,'category_create'])->name('category_create');
 Route::post('/homepage', [UserController::class, 'authenticate']);
 Route::post('/index', [UserController::class, 'authenticate']);
-Route::get('/homepage',[CategoryController::class,'show_categories']);
+Route::get('/homepage', [HomeController::class, 'showHomepage']);
 Route::post('/category_delete/{id}', [CategoryController::class, 'category_delete'])->name('category.delete');
-Route::post('/category_update/{id}', [CategoryController::class, 'category_update'])->name('category.edit');
+Route::post('/category_update/{id}', [CategoryController::class, 'updateCategory'])->name('category.update');
+Route::post('/competetion_create', [CompetionsController::class, 'create_comp']);
 
 Route::get('/logout',[UserController::class,'logout'])->name('logout');;
 
